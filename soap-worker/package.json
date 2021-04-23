@@ -1,0 +1,16 @@
+{
+  "author": "valor <valor312@gmail.com>",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "publish": "wrangler publish",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "util": "^0.12.3",
+    "xml-js": "^1.6.11"
+  },
+  "description": "A template for kick starting a Cloudflare Workers project",
+  "main": "./index.js",
+  "license": "MIT"
+}

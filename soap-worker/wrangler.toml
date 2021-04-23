@@ -1,0 +1,7 @@
+name = "soap-worker"
+type = "webpack"
+
+account_id = "c95f4661a604db3c868ca41b3f00616e"
+workers_dev = true
+route = ""
+zone_id = ""

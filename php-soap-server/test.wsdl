@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="Messaging" name="MessageConversion" targetNamespace="Messaging">
+    <types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="Messaging">
+            <xs:element name="SetMessageRequest">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="MessageStatus" type="xs:string"/>
+                        <xs:element name="ReferenceType" type="xs:string"/>
+                        <xs:element name="QuotedAmount" type="xs:unsignedLong"/>
+                        <xs:element name="Status" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SetMessageResponse">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="MessageStatus" type="xs:string"/>
+                        <xs:element name="ReferenceType" type="xs:string"/>
+                        <xs:element name="QuotedAmount" type="xs:unsignedLong"/>
+                        <xs:element name="Status" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </types>
+    <message name="SetMessageSoapRequest">
+        <part name="parameters" element="tns:SetMessageRequest"/>
+    </message>
+    <message name="SetMessageSoapResponse">
+        <part name="parameters" element="tns:SetMessageResponse"/>
+    </message>
+    <portType name="MessageConversionSoapType">
+        <operation name="SetMessage">
+            <input message="tns:SetMessageSoapRequest"/>
+            <output message="tns:SetMessageSoapResponse"/>
+        </operation>
+    </portType>
+    <binding name="MessageConversionSoapBinding" type="tns:MessageConversionSoapType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="SetMessage">
+            <soap:operation soapAction="http://soap.uitcpro.com/soap_server.php" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MessageConversion">
+        <port name="MessageConversionSoap" binding="tns:MessageConversionSoapBinding">
+            <soap:address location="http://soap.uitcpro.com/soap_server.php"/>
+        </port>
+    </service>
+</definitions>

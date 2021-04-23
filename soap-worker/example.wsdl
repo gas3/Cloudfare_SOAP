@@ -1,0 +1,54 @@
+<wsdl:definitions name="soap-worker" targetNamespace="http://localhost:8787/" xmlns:tns="http://localhost:8787" xmlns:tns="http://localhost:8787/soap-worker.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://localhost:8787/" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+			<xsd:element name="SetMessageStatusRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="MessageStatus" type="string"/>
+						<xsd:element name="ReferenceType" type="string"/>
+						<xsd:element name="PaymentMethodType" type="string"/>
+						<xsd:element name="PaymentMethodCode" type="string"/>
+						<xsd:element name="QuotedCurrencyCode" type="string"/>
+						<xsd:element name="QuotedAmount" type="int"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetMessageStatusResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Result" type="string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:portType name="soap-workerPortType">
+		<wsdl:operation name="SetMessageStatus">
+			<wsdl:input message="tns:SetMessageStatusinputMsg"/>
+			<wsdl:output message="tns:SetMessageStatusoutputMsg"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="soap-workerSoapBinding" type="tns:soap-workerPortType">
+		<soap:binding style="document" xmlns:transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SetMessageStatus">
+			<soap:operation xmlns:soapAction="http://example.com/SetMessageStatus"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="soap-workerService">
+		<wsdl:port name="soap-workerPort" binding="tns:soap-workerSoapBinding">
+			<soap:address location="http://localhost:8787"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:message name="SetMessageStatusinputMsg">
+		<wsdl:part name="body" element="tns:SetMessageStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="SetMessageStatusoutputMsg">
+		<wsdl:part name="body" element="tns:SetMessageStatusResponse"/>
+	</wsdl:message>
+</wsdl:definitions>
